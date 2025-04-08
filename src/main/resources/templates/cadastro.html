@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro de Usuário</title>
+        <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f7fe;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #396F55;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .link a {
+      text-decoration: none;
+      color: #396F55;
+    }
+
+    .alunos {
+        padding: 1px;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-size: 9px;
+        float: right;
+    } 
+        
+    .voltar {
+        text-decoration: none;
+        color: red;
+        padding: 15px;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 16px;
+    } 
+
+  </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <h2>Cadastro de Usuário</h2>
+            <form action="/cadastro" method="POST">
+                <div class="input-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" required>
+                </div>
+                <button type="submit" class="btn">Cadastrar</button>
+            </form>
+            <div class="link">
+                <a href="/login">Já tem conta? Faça login</a>
+            </div>
+            <div class="voltar">
+                <a href="/index">Voltar</a>
+            </div>
+
+            <div class="alunos">
+                <p>Alunos: Jullia Acsa & Rivaldo Roberto</p>
+            </div>
+        </div>
+
+    </body>
+</html>

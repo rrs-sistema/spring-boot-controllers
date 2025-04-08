@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bem-vindo ao Spring Boot</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #396F55;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            background-color: #396F55;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        a {
+            text-decoration: none;
+            color: #396F55;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+        }
+        li {
+            margin: 10px 0;
+        }
+        </style>
+    </head>
+    <body>
+
+        <header>
+            <h1>Bem-vindo ao Spring Boot!</h1>
+            <span class="email" th:text="'Usuário logado: ' + ${nome}"></span>
+        </header>
+
+        <section>
+            <h2>O que é o Spring Boot</h2>
+            <p>O Spring Boot é um framework que facilita a criação de
+                aplicativos Java, eliminando a complexidade de configuração.</p>
+            <p>Com o Spring Boot, você pode configurar facilmente servidores web
+                embutidos, banco de dados, segurança e muito mais, usando
+                configurações automáticas. Isso torna o desenvolvimento mais
+                ágil e simples.</p>
+        </section>
+
+        <section>
+            <h2>Como Funciona o Controller no Spring Boot</h2>
+            <p>No Spring Boot, os **Controllers** são responsáveis por receber
+                as requisições HTTP, processá-las e retornar uma resposta. Eles
+                são a parte central da arquitetura MVC (Model-View-Controller),
+                onde o controller conecta o modelo e a visualização.</p>
+            <ul>
+                <li><b>@Controller</b>: Usado para definir um controlador que
+                    responde às requisições web e retorna visualizações.</li>
+                <li><b>@RestController</b>: Combina @Controller e @ResponseBody,
+                    indicando que os métodos dentro do controller retornam dados
+                    diretamente para a resposta HTTP (usado em APIs REST).</li>
+                <li><b>@GetMapping, @PostMapping</b>: Anotações usadas para
+                    mapear métodos HTTP a métodos de controlador
+                    específicos.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Características principais do Spring Boot</h2>
+            <ul>
+                <li><b>Autoconfiguração (Auto-Configuration):</b> O Spring Boot
+                    configura automaticamente os componentes com base nas
+                    dependências presentes no projeto.</li>
+                <li><b>Produtividade e Convenção sobre Configuração:</b> Oferece
+                    convenções que minimizam a necessidade de configurações
+                    complexas.</li>
+                <li><b>Spring Boot Starter POMs:</b> O Spring Boot oferece
+                    starters para tarefas comuns como acesso a banco de dados,
+                    segurança e APIs REST.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Links úteis</h2>
+            <ul>
+                <li><a href="/logout">Sair</a></li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Para mais informações sobre Spring Boot, visite <a
+                    href="https://spring.io/projects/spring-boot"
+                    target="_blank">Spring Boot Official</a>.</p>
+        </footer>
+
+    </body>
+</html>

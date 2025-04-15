@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Lista de Tarefas</title>
+        <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            background-color: #f4f7fe;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 75%;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #396F55;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .voltar {
+            text-decoration: none;
+            color: red;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        .alunos {
+            padding: 1px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 9px;
+            float: right;
+        }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <h2>Lista de Tarefas</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th style="width: 150px; text-align: center;">Data de
+                            criação</th>
+                        <th style="width: 150px; text-align: center;">Data de
+                            conclusão</th>
+                        <th
+                            style="width: 160px; text-align: center;">Status</th>
+                        <th style="width: 150px; text-align: center;">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iteração sobre as tarefas -->
+                    <tr th:each="tarefa : ${tarefas}">
+                        <td th:text="${tarefa.nome}">Descrição da tarefa</td>
+                        <td th:text="${tarefa.dataCriacao}"
+                            style="width: 150px; text-align: center;">--/--/----</td>
+                        <td th:text="${tarefa.dataConclusao}"
+                            style="width: 150px; text-align: center;">--/--/----</td>
+                        <!-- Link para alterar o status -->
+                        <td style="width: 150px; text-align: center;">
+                            <span
+                                th:text="${tarefa.concluida ? 'Concluída' : 'Não Concluída'}"></span>
+                            <br />
+                        </td>
+                        <!-- Link para alterar o status -->
+                        <td style="width: 150px; text-align: center;">
+                            <a
+                                th:href="@{/alterar-status/{id}(id=${tarefa.id})}"
+                                style="color: #396F55; text-decoration: underline;">
+                                Alterar Status
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- Fim da iteração -->
+                </tbody>
+            </table>
+
+            <a href="/cadastro-tarefa">
+                <button class="btn">Adicionar Nova Tarefa</button>
+            </a>
+
+            <div class="voltar">
+                <a href="/home">Home</a>
+            </div>
+
+            <div class="alunos">
+                <p>Alunos: Jullia Acsa & Rivaldo Roberto</p>
+            </div>
+        </div>
+
+    </body>
+</html>

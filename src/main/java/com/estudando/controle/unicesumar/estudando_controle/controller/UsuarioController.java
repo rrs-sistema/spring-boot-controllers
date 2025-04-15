@@ -1,5 +1,6 @@
 package com.estudando.controle.unicesumar.estudando_controle.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,11 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.estudando.controle.unicesumar.estudando_controle.model.UsuarioModel;
+import com.estudando.controle.unicesumar.estudando_controle.service.UsuarioService;
 
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class UsuarioController {
+
+    @Autowired
+    UsuarioService usuarioService;
 
     // Exibe a página de login
     @GetMapping("/login")
@@ -21,18 +26,13 @@ public class UsuarioController {
 
     // Trata a requisição POST do formulário de login
     @PostMapping("/validar-credenciais")
-    public String validarCredenciais(@RequestParam String email, @RequestParam String senha, Model model,
-            HttpSession session) {
+    public String validarCredenciais(@RequestParam String email, @RequestParam String senha,
+            Model model, HttpSession session) {
         // Verifica as credenciais do usuário
-        if ((email.equalsIgnoreCase("rivaldo@gmail.com") || email
-                .equalsIgnoreCase("acsa@gmail.com")) && senha.equals("123456")) {
-            // Salva o usuário na sessão
-            UsuarioModel user = new UsuarioModel(email, senha);
-            session.setAttribute("usuario", user); // Salva o usuário na sessão
-            return "redirect:/home"; // Redireciona para a página inicial após login
+        Boolean logou = usuarioService.findByEmailAndSenha(email, senha, model, session);
+        if (logou) {
+            return "redirect:/lista-tarefa"; // Redireciona para a página inicial após login
         } else {
-            // Adiciona mensagem de erro e retorna para a página de login
-            model.addAttribute("msg", "Usuário ou senha inválidos!");
             return "login"; // Retorna para a página de login com mensagem de erro
         }
     }
@@ -46,16 +46,20 @@ public class UsuarioController {
     // Processa o cadastro de um novo usuário
     @PostMapping("/cadastro")
     public String cadastrar(@RequestParam String nome, @RequestParam String email, @RequestParam String senha,
-            Model model,
-            HttpSession session) {
+            @RequestParam String confirmaSenha, Model model, HttpSession session) {
+
+        UsuarioModel usuario = new UsuarioModel();
+        if (!usuario.validaSenha(senha, confirmaSenha)) {
+            model.addAttribute("msg", "As senhas não conferem!");
+            return "cadastro"; // Retorna para a página de login com mensagem de erro
+        }
         // Cria um novo usuário com os dados fornecidos
-        UsuarioModel usuario = new UsuarioModel(nome, email, senha);
+        Boolean cadastrou = usuarioService.save(nome, email, senha, model, session);
 
-        // Aqui você pode salvar o usuário na sessão ou em uma lista temporária (sem
-        // banco de dados)
-        session.setAttribute("usuario", usuario); // Salva o usuário na sessão
-
+        if (!cadastrou) {
+            return "cadastro";
+        }
         // Redireciona para a página home após o cadastro
-        return "redirect:/home";
+        return "redirect:/lista-tarefa";
     }
 }

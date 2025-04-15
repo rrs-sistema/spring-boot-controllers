@@ -122,14 +122,16 @@
         <a href="/index">Voltar</a>
       </div>
 
-      <div class="alunos">
-        <p>Alunos: Jullia Acsa & Rivaldo Roberto</p>
-      </div>
-
       <!-- Exibe a mensagem de erro se houver -->
       <section>
         <div class="error-message" th:if="${msg != null}"
           th:text="${msg}"></div>
+      </section>
+
+      <section>
+        <div class="alunos">
+          <p>Alunos: Jullia Acsa & Rivaldo Roberto</p>
+        </div>
       </section>
     </div>
   </body>

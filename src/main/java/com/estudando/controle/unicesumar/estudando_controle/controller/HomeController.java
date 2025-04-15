@@ -15,22 +15,13 @@ public class HomeController {
     @GetMapping("/home")
     public String home(HttpSession session, Model model) {
         // Verifica se o usuário está autenticado na sessão
-        UsuarioModel usuario = (UsuarioModel) session.getAttribute("usuario");
-
-        if (usuario != null) {
-            model.addAttribute("usuario", usuario); // Exibe as informações do usuário na home
-
-            if (usuario.getEmail().equalsIgnoreCase("rivaldo@gmail.com")) {
-                model.addAttribute("nome", "Rivaldo Roberto");
-            } else if (usuario.getEmail().equalsIgnoreCase("acsa@gmail.com")) {
-                model.addAttribute("nome", "Jullia Acsa");
-            } else {
-                model.addAttribute("nome", "Usuário não encontrado!");
-            }
-
+        Object objectSession = session.getAttribute("usuario");
+        if (objectSession != null) {
+            UsuarioModel usuario = (UsuarioModel) objectSession;
+            model.addAttribute("nome", usuario.getNome());
+            session.setAttribute("usuario", usuario);
             return "home"; // Retorna a página home (home.html)
         }
-
         // Se não houver sessão, redireciona para login
         return "redirect:/login"; // Redireciona para a tela de login caso o usuário não esteja logado
     }
